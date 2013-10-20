@@ -1,0 +1,83 @@
+After: decompress LZW C:\Users\T-Frank\Documents\Programming\TestWrite
+parentdir = C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead.cru
+Reader: C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead.cru
+size = 1166372
+nameLength = 65
+check
+path = TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/fed.txt
+append T
+append Te
+append Tes
+append Test
+append TestR
+append TestRe
+append TestRea
+append TestRead
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead
+append TestRead/
+append TestRead/O
+append TestRead/On
+append TestRead/One
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One
+append TestRead/One/
+append TestRead/One/T
+append TestRead/One/Tw
+append TestRead/One/Two
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two
+append TestRead/One/Two/
+append TestRead/One/Two/T
+append TestRead/One/Two/Th
+append TestRead/One/Two/Thr
+append TestRead/One/Two/Thre
+append TestRead/One/Two/Three
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three
+append TestRead/One/Two/Three/
+append TestRead/One/Two/Three/F
+append TestRead/One/Two/Three/Fo
+append TestRead/One/Two/Three/Fou
+append TestRead/One/Two/Three/Four
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three/Four
+append TestRead/One/Two/Three/Four/
+append TestRead/One/Two/Three/Four/F
+append TestRead/One/Two/Three/Four/Fi
+append TestRead/One/Two/Three/Four/Fiv
+append TestRead/One/Two/Three/Four/Five
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three/Four/Five
+append TestRead/One/Two/Three/Four/Five/
+append TestRead/One/Two/Three/Four/Five/S
+append TestRead/One/Two/Three/Four/Five/Si
+append TestRead/One/Two/Three/Four/Five/Six
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three/Four/Five/Six
+append TestRead/One/Two/Three/Four/Five/Six/
+append TestRead/One/Two/Three/Four/Five/Six/S
+append TestRead/One/Two/Three/Four/Five/Six/Se
+append TestRead/One/Two/Three/Four/Five/Six/Sev
+append TestRead/One/Two/Three/Four/Five/Six/Seve
+append TestRead/One/Two/Three/Four/Five/Six/Seven
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three/Four/Five/Six/Seven
+append TestRead/One/Two/Three/Four/Five/Six/Seven/
+append TestRead/One/Two/Three/Four/Five/Six/Seven/E
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Ei
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eig
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eigh
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three/Four/Five/Six/Seven/Eight
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/N
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Ni
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nin
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/T
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Te
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten
+C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/f
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/fe
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/fed
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/fed.
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/fed.t
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/fed.tx
+append TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten/fed.txt

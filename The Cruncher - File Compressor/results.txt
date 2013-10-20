@@ -1,0 +1,36 @@
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+open
+check: 
+mymultimap.size() is 11
+begin compression
+target = C:/Users/T-Frank/Documents/Programming/TestWrite/TestRead.cru
+  [C:/Users/T-Frank/Documents/Programming/TestRead, One]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One, Two]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two, Three]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three, Four]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three/Four, Five]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three/Four/Five, Six]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three/Four/Five/Six, Seven]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three/Four/Five/Six/Seven, Eight]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three/Four/Five/Six/Seven/Eight, Nine]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine, Ten]
+  [C:/Users/T-Frank/Documents/Programming/TestRead/One/Two/Three/Four/Five/Six/Seven/Eight/Nine/Ten, fed.txt]

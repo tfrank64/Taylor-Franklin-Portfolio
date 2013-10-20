@@ -1,0 +1,6 @@
+g++ -Wall -Wextra main.cpp FileStructure.cpp compress.cpp -o cruncher
+./cruncher /Users/Fraser/Documents/TestRead compress -a LZW -o /Users/Fraser/Documents/TestRead/
+./cruncher /Users/Fraser/Documents/TestWrite/TestRead.cru decompress -a LZW -o /Users/Fraser/Documents/TestWrite
+
+cruncher C:\Users\T-Frank\Documents\Programming\TestRead compress -a LZW -o C:\Users\T-Frank\Documents\Programming\TestWrite
+cruncher C:\Users\T-Frank\Documents\Programming\TestWrite\TestRead.cru decompress -a LZW -o C:\Users\T-Frank\Documents\Programming\TestWrite
