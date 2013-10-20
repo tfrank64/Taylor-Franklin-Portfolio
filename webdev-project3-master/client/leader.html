@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Deathships</title>
+		<link rel="shortcut icon" href="img/favicon.ico">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+		<script src="http://underscorejs.org/underscore.js"></script>
+		<script src="js/base.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+	</head>
+	<body>
+	
+	<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '364074063698127',                        // App ID from the app dashboard
+      channelUrl : 'http://taylor.johnellmore.com/testShip/index.html', // Channel file for x-domain comms
+      status     : true,                                 // Check Facebook Login status
+	  cookie	 : true,
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+	function login() {
+		FB.login(function(response) {
+			if (response.authResponse) {
+				console.log("connected");
+				userInfo();
+			} else {
+				console.log("cancelled");
+			}
+		}, {scope: 'publish_actions'});
+	}
+	
+	function logout() {
+		FB.logout(function(response) {
+			console.log('User is now logged out');
+		});
+	}
+	FB.getLoginStatus(function(response) {
+		if (response.status === 'connected') {
+			var uid = response.authResponse.userID;
+			accessToken = response.authResponse.accessToken;
+			userInfo();
+			
+			FB.api( '/364074063698127/scores', 'get', {
+				  'access_token': accessToken
+			  }, function(response) {
+				  userData=response.data;
+				  var outputname='', outputscore='';
+				  outputname += '<h3 id="usr">User</h3>';
+				  outputscore += '<h3 id="num">Games Played</h3>';
+				  $.each(userData, function(scoreIndex, scoreObject) {
+						
+						outputname += '<p>'+scoreObject.user.name + '</p>';
+						outputscore += '<p>'+scoreObject.score + '</p>';
+				  });
+				  document.getElementById('name').innerHTML = outputname;
+				  document.getElementById('played').innerHTML = outputscore;
+			});
+			
+			
+			
+		} else if (response.status === 'not_authorized') {
+			// User logged into FB but not authorized
+			login();
+		} else {
+			// User not logged into FB
+			login();
+		}
+	});
+	
+		function userInfo() {
+			console.log('Welcome!  Fetching your information.... ');
+			FB.api('/me', function(response) {
+				document.getElementById('pic').src = "http://graph.facebook.com/" + response.id + "/picture";
+				
+			});
+			
+			FB.api('/me', function(response) {
+				var stuff = response.name;
+				document.getElementById('hello').innerHTML="Welcome, " + stuff;
+				console.log(stuff);
+				
+			});
+		}	
+		
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+		<nav>
+			<img id="pic" src="" />
+			<p id="hello"></p>
+			<a href="index.html"><button type="button" style="float:right;" value="" class="css3button">Main Menu</button></a>
+		</nav>
+		<div id="leaderContainer">
+			<div id="signin" class="centeredFormv2">
+				<h1 class="title">Battleship Leaderboard</h1>
+				<div id="board">
+					<div id="name"></div>
+					<div id="played"></div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

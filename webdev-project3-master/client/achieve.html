@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Deathships</title>
+		<link rel="shortcut icon" href="img/favicon.ico">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+		<script src="http://underscorejs.org/underscore.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<script src="js/base.js"></script>
+	</head>
+	<body>
+	
+	<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '364074063698127',                        // App ID from the app dashboard
+      channelUrl : 'http://taylor.johnellmore.com/testShip/index.html', // Channel file for x-domain comms
+      status     : true,                                 // Check Facebook Login status
+	  cookie	 : true,
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+	function login() {
+		FB.login(function(response) {
+			if (response.authResponse) {
+				console.log("connected");
+				userInfo();
+			} else {
+				console.log("cancelled");
+			}
+		}, {scope: 'publish_actions'});
+	}
+	
+	FB.getLoginStatus(function(response) {
+		if (response.status === 'connected') {
+			// User logged into FB and authorized
+			var uid = response.authResponse.userID;
+			accessToken = response.authResponse.accessToken;
+			userInfo();
+			FB.api( '/364074063698127/achievements', 'get', {
+				'access_token': '364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY'
+			  }, function(appResponse) {
+				//Declare variable to hold App Achievement Data
+				appAchievements=appResponse.data;
+
+				 //Output App Achievements
+				var output = '<p id="good">How good are you at Deathships? Let the achievements speak for themselves.</p>';
+				$.each(appAchievements, function(appIndex, appObject) {
+					
+				  output += '<div class="article group">';
+				  output += '<img src="'+appObject.image[0].url+'" alt="' + appObject.title + '">';
+				  output += '<div class="text group">';
+				  output += '<h4>' + appObject.title + '</h4>';
+				  output += '<p>' + appObject.description + '</p>';
+				  output += '</div><!-- text -->';
+				  output += '</div><!-- articles -->';
+				});
+
+				  document.getElementById('appachievements').innerHTML = output;
+
+			}); //get app achievements
+			
+			      //Get Achievements from this user
+				  FB.api( '/' + uid + '/achievements', 'get', {
+					  'access_token': accessToken
+				  }, function(userResponse) {
+					  userAchievements=userResponse.data;
+
+					  //Output User Achievements
+								if (userAchievements.length) {
+									output = '<h3>Your Achievements</h3>';
+
+									for (i in userAchievements) {
+									  $.each(appAchievements, function(appIndex, appObject) {
+										  //If the user achievements match app achievements, display them.
+										  if (userAchievements[i].achievement.title==appObject.title) {
+											output += '<div class="article group">';
+											output += '<img src="'+appObject.image[0].url+'" alt="' + appObject.title + '">';
+											output += '<div class="text">';
+											output += '<h4>' + userAchievements[i].achievement.title + '</h4>';
+											output += '<p>' + appObject.description + '</p>';
+											output += '</div><!-- Text -->';
+											output += '</div><!-- article -->';
+										  }; // Check if titles match
+									  }); //Go through each app Achievement
+									} //go through each User Achievement
+									
+								} else { //user has achievements
+									var output = '<p>Sorry, you have not earned any achievements yet.</p>';
+								} //user has no achievements
+					  document.getElementById('userachievements').innerHTML = output;
+
+				  }); // get user achievements
+			
+		} else if (response.status === 'not_authorized') {
+			// User logged into FB but not authorized
+			login();
+		} else {
+			// User not logged into FB
+			login();
+		}
+	});
+	
+		function userInfo() {
+			console.log('Welcome!  Fetching your information.... ');
+			FB.api('/me', function(response) {
+				document.getElementById('pic').src = "http://graph.facebook.com/" + response.id + "/picture";
+				
+			});
+			
+			FB.api('/me', function(response) {
+				var stuff = response.name;
+				document.getElementById('hello').innerHTML="Welcome, " + stuff;
+				console.log(stuff);
+				
+			});
+		}	
+		
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+		<nav>
+			<img id="pic" src="" />
+			<p id="hello"></p>
+			<a href="index.html"><button type="button" style="float:right;" value="" class="css3button">Main Menu</button></a>
+		</nav>
+		<div id="leaderContainer">
+			<div id="signin" class="centeredForm">
+				<h1 class="title">Achievements</h1>
+				<div id="achievements">
+					<div id="appachievements" class="group"></div>
+					<div id="userachievements" class="group"></div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

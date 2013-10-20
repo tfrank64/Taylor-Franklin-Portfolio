@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>Deathships!</title>
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <link rel="stylesheet" type="text/css" href="css/battle.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://underscorejs.org/underscore.js"></script>
+  <!-- LOCALHOST -->
+  <!--script src="http://localhost:8000/socket.io/socket.io.js"></script-->
+  <!-- NODEJITSU -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/Player.js"></script>
+  <script src="js/kinetic-v4.4.3.min.js"></script>
+  <script src="js/war.js"></script>
+</head>
+<body>
+
+
+
+  <div id="fb-root"></div>
+<script>
+var curScore;
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '364074063698127',                        // App ID from the app dashboard
+      channelUrl : 'http://taylor.johnellmore.com/testShip/index.html', // Channel file for x-domain comms
+      status     : true,                                 // Check Facebook Login status
+      cookie   : true,
+      xfbml      : true                                  // Look for social plugins on the page
+    });
+
+    // Additional initialization code such as adding Event Listeners goes here
+  function login() {
+    FB.login(function(response) {
+      if (response.authResponse) {
+        console.log("connected");
+        userInfo();
+      } else {
+        console.log("cancelled");
+      }
+    }, {scope: 'publish_actions,user_games_activity'});
+  }
+  
+
+  FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+      // User logged into FB and authorized
+      var uid = response.authResponse.userID;
+      accessToken = response.authResponse.accessToken;
+      userInfo();
+      
+            //Get Achievements from this user
+          FB.api( '/' + uid + '/achievements', 'get', {
+            'access_token': accessToken
+          }, function(userResponse) {
+            userAchievements=userResponse.data;
+            
+            
+            
+            FB.api( '/' + uid + '/scores', 'get', {
+              'access_token': accessToken
+            }, function(response) {
+
+              if( response.data.length == 0) {
+                curScore = 0;
+            }
+              else {
+                curScore=response.data[0].score;
+                curScore+=1;
+            }
+
+             FB.api( '/'+uid+'/scores?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post',  {  score: curScore
+        },function(response) {/*console.debug("callback: " + response);*/ });
+
+              var day = new Date();
+              var n = day.getHours();
+              day = day.getDay();
+              //use scores api to know games played count
+              //-------------Assign achievements------------------------
+              var hasNewbie, hasThank, fiveGames, tenGames, twenfive, fiftyGames, hunGames, halfway,weekend,latenight;
+              $.each(userAchievements, function(userIndex, userObject) {
+                if (userObject.achievement.title=='Fresh Face Achievement') {
+                hasNewbie=true;
+                }
+                if(userObject.achievement.title=='Thanks From Taylor & Jacob') {
+                hasThank=true;
+                }
+                
+                if (userObject.achievement.title=='5 Deathship Games') {
+                fiveGames=true;
+                }
+                if (userObject.achievement.title=='10 Deathship Games') {
+                tenGames=true;
+                }
+                if (userObject.achievement.title=='25 Deathship Games') {
+                twenfive=true;
+                }
+                if (userObject.achievement.title=='50 Deathship Games') {
+                fiftyGames=true;
+                }
+                if (userObject.achievement.title=='100 Deathship Games') {
+                hunGames=true;
+                }
+                if(userObject.achievement.title=='5 Achievements Achievement') {
+                halfway=true;
+                }
+                if(userObject.achievement.title=='Weekend Player') {
+                weekend=true;
+                }
+                if(userObject.achievement.title=='Video Game Junkie') {
+                latenight=true;
+                }
+              });
+
+              if (!(hasNewbie)) {
+                //try to post a newbie achievement to a user
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach2.php'
+                });
+              } 
+              
+              if (!(hasThank)) {
+                //give thank you achievment
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach1.html'
+                });
+              }
+
+              if (!(fiveGames) && curScore >= 5) {
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach3.php'
+                });
+              }
+              if (!(tenGames) && curScore >= 10) {
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach4.php'
+                });
+              }
+              if (!(twenfive) && curScore >= 25) {
+        console.log("inside");
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach5.php'
+                });
+              }
+              if (!(fiftyGames) && curScore >= 50) {
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach6.php'
+                });
+              }
+              if (!(hunGames) && curScore >= 100) {
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach7.php'
+                });
+              }
+              if (!(halfway) && userAchievements.length >= 5) {
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach8.php'
+                });
+              }
+              if (!(weekend) && (day == 0 || day == 6)) {
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach9.php'
+                });
+              }
+              if (!(latenight) && (n >= 0 && n < 7)) {
+                FB.api( '/'+uid+'/achievements?access_token='+'364074063698127|QyGXanZKP-r_7DcyLbetLHdq4FY', 'post', {
+                  'achievement': 'http://taylor.johnellmore.com/testShip/ach10.php'
+                });
+              }
+          });
+         
+       });
+      
+    } else if (response.status === 'not_authorized') {
+      // User logged into FB but not authorized
+      login();
+    } else {
+      // User not logged into FB
+      login();
+    }
+  });
+
+    function userInfo() {
+      console.log('Welcome!  Fetching your information.... ');
+
+      FB.api('/me', function(response) {
+        var stuff = response.name;
+       document.getElementById('hello').innerHTML="Player: " + stuff;
+          console.log("Welcome, " + stuff);
+        
+      });
+    }
+
+    
+  };
+    
+  // Load the SDK asynchronously
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+  <h1 class="look">Death Ships!</h1><p id="yay"></p>
+  <div class="clearFloat"></div>
+  <div id="leftMenu">
+    <button class="menuButton" id="messageButton">
+      <span id="message">
+        Place Ships
+      </span>
+      <img id="toggleIcon" src="img/toggle_down.png" style="height:35px; width:35 px;">
+    </button> 
+    <p id="current">Click on grid, select direction for: <span id="currentShip">Aircraft Carrier (5 spaces)</span></p>
+    <button class="direct menuButton" type="button" id="quiet">Mute</button>
+    <button class="rules menuButton" onclick="window.location = 'http://www.conceptispuzzles.com/?uri=puzzle/battleships/rules'">Rules of play</a></button>
+    <button class="direct menuButton" onclick="window.location = 'index.html'">Main Menu</button>
+    <button class="direct menuButton" id="showscore" onclick="publishStory()">Post Score</button>
+    <button class="direct menuButton" id="showscore" onclick="sendRequestViaMultiFriendSelector()">Invite Friends</button>
+  
+  <p id="hello"></p>
+  </div>
+  <div id="shipStage" class="stage"></div>
+  <div id="battleStage" class="stage"></div>
+  <script>
+    $(document).ready(function() {
+      startGame();
+    });
+
+    function publishStory() {
+      FB.ui({
+        method: 'feed',
+        name: 'I have played Deathships ' + curScore + ' times!',
+        caption: 'Taylor & Jacob',
+        description: 'Check out this new online battleship game, Deathships. You won\'t regret it!',
+        link: 'http://battleship.jit.su/',
+        picture: 'http://rlv.zcache.com/battleship_icon_round_stickers-r70dbfc3322e24fb28823b0a2f01b4095_v9waf_8byvr_75.jpg',
+        actions: [{ name: 'Get Started', link: 'http://battleship.jit.su/' }],
+      }, 
+      function(response) {
+        console.log('publishStory UI response: ', response);
+      });
+
+    }
+    function sendRequestViaMultiFriendSelector() {
+      FB.ui({method: 'apprequests',
+        message: 'My Deathships Request'
+      });
+    }
+  </script>
+  <div class="clearFloat"></div>
+ <form id="direction">
+    <select name="Shipdirection" id="Ways">
+      <option value="North">North</option>
+      <option value="South">South</option>
+      <option value="West">West</option>
+      <option value="East">East</option>
+    </select>
+    <button class="direct" name="data" type="button" id="go">GO</button>
+  </form>
+  </p>
+  <br/>
+  <audio id="soundDiv" hidden="true" autoplay>
+  Your browser does not support the audio element.
+  </audio>
+</body>
+</html>
